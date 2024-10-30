@@ -1,0 +1,20 @@
+{
+  "name": "locus",
+  "version": "1.0.0",
+  "description": "A travel app that allows users to plan out vacations by selecting attractions and hotels and organizing them in whatever order they please",
+  "main": "server.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "locus"
+  },
+  "author": "Hashem Elmaghrabi, Olivia Te Kolste, Cyrous Bortey, Feleg Teklezghi",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.1",
+    "mongoose": "^8.7.3",
+    "react": "^18.3.1"
+  }
+}
