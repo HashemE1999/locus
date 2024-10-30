@@ -13,6 +13,7 @@
   "author": "Hashem Elmaghrabi, Olivia Te Kolste, Cyrous Bortey, Feleg Teklezghi",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.21.1",
     "mongoose": "^8.7.3",
     "react": "^18.3.1"
