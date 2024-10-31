@@ -34,6 +34,11 @@ const resolvers = {
         const token = signToken(user);
   
         return { token, user };
+    },
+    addTrip: async (parent, { attractions }) => {
+      // Create a new trip with the provided attractions
+      const trip = await Trip.create({ attractions });
+      return trip;
     }
   },
 };
