@@ -16,6 +16,25 @@ const resolvers = {
 
       return { token, user };
     },
+    login: async (parent, { email, password }) => {
+      // Log existing user in
+        const user = await User.findOne({ email });
+
+        // Throws error if user does not exist
+        if (!user) {
+          throw AuthenticationError;
+        }
+        // Checks password for correctness
+        const correctPw = await user.isCorrectPassword(password);
+        // Throws error if password input is incorrect
+        if (!correctPw) {
+          throw AuthenticationError;
+        }
+  
+        const token = signToken(user);
+  
+        return { token, user };
+    }
   },
 };
 
