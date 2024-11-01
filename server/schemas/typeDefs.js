@@ -21,4 +21,13 @@ const typeDefs = `
         password: String!
         trips: [Trip]
     }
+
+    type Query {
+        getUser(id: ID!): User
+        getAllUsers: [User]
+        getTrip(id: ID!): Trip
+        getAllTrips: [Trip]
+        getAttraction(id: ID!): Attraction
+        getAllAttractions: [Attraction]
+    }
 `;
