@@ -48,6 +48,11 @@ const resolvers = {
       const trip = await Trip.create({ attractions });
       return trip;
     },
+    removeTrip: async (parent, { tripId }) => {
+      // Remove a trip by ID
+      const trip = await Trip.findByIdAndDelete(tripId);
+      return trip;
+    },
   },
 };
 
