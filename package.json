@@ -4,7 +4,8 @@
   "description": "A travel app that allows users to plan out vacations by selecting attractions and hotels and organizing them in whatever order they please",
   "main": "server.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
