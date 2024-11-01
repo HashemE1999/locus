@@ -1,4 +1,6 @@
 const typeDefs = `
+    scalar Date
+
     type Trip {
         _id: ID!
         attractions: [Attraction]
@@ -19,4 +21,4 @@ const typeDefs = `
         password: String!
         trips: [Trip]
     }
-`
+`;

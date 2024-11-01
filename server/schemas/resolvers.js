@@ -1,7 +1,9 @@
-const { User } = require("../models");
+const { User, Trip } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
+const DateScalar = require("./DateScalar");
 
 const resolvers = {
+  Date: DateScalar,
   Query: {
     // Other query resolvers
     getTrips: async (parent, args, context) => {
