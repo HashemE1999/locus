@@ -31,5 +31,11 @@ const typeDefs = `
         getAllUsers: [User]
         getUser(id: ID!): User
         me: User
-    }        
+    }     
+    type Mutation {
+        addUser(username: String!, email: String!, password: String!): Auth
+        login(email: String!, password: String!): Auth
+        addTrip(attractions: [attractions]): Trip
+        removeTrip(tripId: ID!): Trip  
+    }   
 `;
