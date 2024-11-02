@@ -21,10 +21,17 @@ connection.once("open", async () => {
     await connection.dropCollection("users");
   }
 
-  await User.insertMany(userData);
+  await insertDocs(userData);
 
   console.table(userData);
 
   console.info("Seeding complete! 🌱");
   process.exit(0);
 });
+
+async function insertDocs(docs) {
+  for (const doc of docs) {
+    const instance = new User(doc);
+    await instance.save();
+  }
+}

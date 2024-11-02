@@ -29,10 +29,14 @@ const userSchema = new Schema({
 // Middleware called before an user is saved in the database to hash their password
 userSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("password")) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
+    try {
+      const saltRounds = 10;
+      this.password = await bcrypt.hash(this.password, saltRounds);
+      console.log("Hashed!");
+    } catch (e) {
+      console.log(e);
+    }
   }
-
   next();
 });
 
