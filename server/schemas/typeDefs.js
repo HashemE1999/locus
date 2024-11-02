@@ -1,35 +1,39 @@
-const typeDefs = `
-    scalar Date
+const { gql } = require("apollo-server");
 
-    type Trip {
-        _id: ID!
-        attractions: [Attraction]
-    }
+const typeDefs = gql`
+  scalar Date
 
-    type Attraction {
-        _id: ID!
-        name: String!
-        category: String!
-        rank: Int
-        tags: [String]
-    }
+  type Trip {
+    _id: ID!
+    attractions: [Attraction]
+  }
 
-    type Auth {
-        token: ID!
-        user: User
-    }
+  type Attraction {
+    _id: ID!
+    name: String!
+    category: String!
+    rank: Int
+    tags: [String]
+  }
 
-    type User {
-        _id: ID!
-        username: String!
-        email: String!
-        password: String!
-        trips: [Trip]
-    }
-        
-    type Query {
-        getAllUsers: [User]
-        getUser(id: ID!): User
-        me: User
-    }        
+  type Auth {
+    token: ID!
+    user: User
+  }
+
+  type User {
+    _id: ID!
+    username: String!
+    email: String!
+    password: String!
+    trips: [Trip]
+  }
+
+  type Query {
+    getAllUsers: [User]
+    getUser(id: ID!): User
+    me: User
+  }
 `;
+
+module.exports = typeDefs;
