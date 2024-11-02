@@ -32,7 +32,6 @@ userSchema.pre("save", async function (next) {
     try {
       const saltRounds = 10;
       this.password = await bcrypt.hash(this.password, saltRounds);
-      console.log("Hashed!");
     } catch (e) {
       console.log(e);
     }

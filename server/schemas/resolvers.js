@@ -27,7 +27,6 @@ const resolvers = {
     login: async (parent, { email, password }) => {
       // Log existing user in
       const user = await User.findOne({ email });
-      console.log(user);
       // Throws error if user does not exist
       if (!user) {
         throw AuthenticationError;
@@ -36,7 +35,6 @@ const resolvers = {
       const correctPw = await user.isCorrectPassword(password);
       // Throws error if password input is incorrect
       if (!correctPw) {
-        console.log("RAAAAAAAAAAAAAAAA");
         throw AuthenticationError;
       }
 
