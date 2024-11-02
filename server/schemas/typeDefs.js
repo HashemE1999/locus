@@ -29,6 +29,13 @@ const typeDefs = gql`
     trips: [Trip]
   }
 
+  input AttractionInput {
+    name: String!
+    category: String!
+    rank: Int
+    tags: [String]
+  }
+
   type Query {
     getAllUsers: [User]
     getUser(id: ID!): User
@@ -38,7 +45,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addTrip(attractions: [Attraction]): Trip
+    addTrip(attractions: [AttractionInput]): Trip
     removeTrip(tripId: ID!): Trip
   }
 `;
