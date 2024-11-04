@@ -1,41 +1,53 @@
-const typeDefs = `
-    scalar Date
+const { gql } = require("apollo-server");
 
-    type Trip {
-        _id: ID!
-        attractions: [Attraction]
-    }
+const typeDefs = gql`
+  scalar Date
 
-    type Attraction {
-        _id: ID!
-        name: String!
-        category: String!
-        rank: Int
-        tags: [String]
-    }
+  type Trip {
+    _id: ID!
+    attractions: [Attraction]
+  }
 
-    type Auth {
-        token: ID!
-        user: User
-    }
+  type Attraction {
+    _id: ID!
+    name: String!
+    category: String!
+    rank: Int
+    tags: [String]
+  }
 
-    type User {
-        _id: ID!
-        username: String!
-        email: String!
-        password: String!
-        trips: [Trip]
-    }
-        
-    type Query {
-        getAllUsers: [User]
-        getUser(id: ID!): User
-        me: User
-    }     
-    type Mutation {
-        addUser(username: String!, email: String!, password: String!): Auth
-        login(email: String!, password: String!): Auth
-        addTrip(attractions: [attractions]): Trip
-        removeTrip(tripId: ID!): Trip  
-    }   
+  type Auth {
+    token: ID!
+    user: User
+  }
+
+  type User {
+    _id: ID!
+    username: String!
+    email: String!
+    password: String!
+    trips: [Trip]
+  }
+
+  input AttractionInput {
+    name: String!
+    category: String!
+    rank: Int
+    tags: [String]
+  }
+
+  type Query {
+    getAllUsers: [User]
+    getUser(id: ID!): User
+    me: User
+  }
+
+  type Mutation {
+    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    addTrip(attractions: [AttractionInput]): Trip
+    removeTrip(tripId: ID!): Trip
+  }
 `;
+
+module.exports = typeDefs;

@@ -6,7 +6,7 @@ const resolvers = {
   Date: DateScalar,
   Query: {
     // Other query resolvers
-    getTrips: async (parent, args, context) => {
+    me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("trips");
       }
@@ -27,7 +27,6 @@ const resolvers = {
     login: async (parent, { email, password }) => {
       // Log existing user in
       const user = await User.findOne({ email });
-
       // Throws error if user does not exist
       if (!user) {
         throw AuthenticationError;
