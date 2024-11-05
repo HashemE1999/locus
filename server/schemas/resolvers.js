@@ -42,15 +42,31 @@ const resolvers = {
 
       return { token, user };
     },
-    addTrip: async (parent, { attractions }) => {
+    addTrip: async (parent, { attractions }, context) => {
       // Create a new trip with the provided attractions
-      const trip = await Trip.create({ attractions });
-      return trip;
+      if (context.user) {
+        const trip = await Trip.create({ attractions });
+        const user = await User.findOneAndUpdate(
+          { _id: context.user_id },
+          { $addToSet: trip },
+          { new: true }
+        );
+        return trip;
+      }
+      throw AuthenticationError;
     },
-    removeTrip: async (parent, { tripId }) => {
+    removeTrip: async (parent, { tripId }, context) => {
       // Remove a trip by ID
-      const trip = await Trip.findByIdAndDelete(tripId);
-      return trip;
+      if (context.user) {
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedTrips: tripId } },
+          { new: true }
+        );
+        const trip = await Trip.findByIdAndDelete(tripId);
+        return trip;
+      }
+      throw AuthenticationError;
     },
   },
 };
