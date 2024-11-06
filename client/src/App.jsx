@@ -1,21 +1,27 @@
-import './App.css';
-import { Outlet } from 'react-router-dom';
+import "./App.css";
+import { Outlet } from "react-router-dom";
 // Importing necessary dependencies to initialize Apollo Server
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import Footer from "./components/Footer";
 
 // Constructing main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: '/graphql'
+  uri: "/graphql",
 });
 
-const authLink = setContext((_,{headers}) => {
-  const authToken = localStorage.getItem('id_token')
+const authLink = setContext((_, { headers }) => {
+  const authToken = localStorage.getItem("id_token");
   // Returning the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: authToken ? `Bearer ${authToken}` : '',
+      authorization: authToken ? `Bearer ${authToken}` : "",
     },
   };
 });
@@ -31,8 +37,9 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <div className="flex-column justify-center align-center min-100-vh bg-primary">
-            <Outlet />
+          <Outlet />
         </div>
+        <Footer />
       </ApolloProvider>
     </>
   );

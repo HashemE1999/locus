@@ -1,28 +1,29 @@
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from './App.jsx';
-import Login from './components/LoginForm.jsx';
+import App from "./App.jsx";
+import Login from "./components/LoginForm.jsx";
 //Need to route for the home element
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
-    error: <NoMatch />,
+    error: <h1>Something went wrong!</h1>,
     children: [
       {
-        index: true, 
-        element: <Home />
-      }, {
-        path: '/login',
-        element: <Login />
-      }
-    ]
-  }
+        index: true,
+        element: <h1>Welcome to Locus!</h1>,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+    ],
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
-)
+);
