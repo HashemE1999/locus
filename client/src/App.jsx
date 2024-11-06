@@ -1,13 +1,9 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
 // Importing necessary dependencies to initialize Apollo Server
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  createHttpLink,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import PointsOfInterest from './components/PointsOfInterest';
+import { setContext } from '@apollo/client/link/context';
 import Footer from "./components/Footer";
 
 // Constructing main GraphQL API endpoint
@@ -41,6 +37,10 @@ function App() {
         </div>
         <Footer />
       </ApolloProvider>
+      <div>
+    <h1>Explore Points of Interest</h1>
+      <PointsOfInterest />
+    </div>
     </>
   );
 }
