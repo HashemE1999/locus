@@ -2,6 +2,7 @@ import './App.css';
 import { Outlet } from 'react-router-dom';
 // Importing necessary dependencies to initialize Apollo Server
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import PointsOfInterest from './components/PointsOfInterest';
 import { setContext } from '@apollo/client/link/context';
 
 // Constructing main GraphQL API endpoint
@@ -34,6 +35,10 @@ function App() {
             <Outlet />
         </div>
       </ApolloProvider>
+      <div>
+    <h1>Explore Points of Interest</h1>
+      <PointsOfInterest />
+    </div>
     </>
   );
 }
