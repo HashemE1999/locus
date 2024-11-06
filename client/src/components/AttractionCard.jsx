@@ -1,16 +1,15 @@
 import React from 'react';
 
 const AttractionCard = ({ attraction }) => {
-  // Destructure the data
-  const { name, category, tags } = attraction;
+  const { name, category, tags = [] } = attraction;
 
-  // first three tags for the pills
+  // First three tags for display
   const displayTags = tags.slice(0, 3);
 
   return (
     <div style={styles.card}>
       <img
-        src="https://via.placeholder.com/300x200" // Replace with actual image URL when data is available
+        src="https://via.placeholder.com/300x200" // Placeholder; update if image data is available
         alt={name}
         style={styles.image}
       />
@@ -29,7 +28,6 @@ const AttractionCard = ({ attraction }) => {
   );
 };
 
-// inline styles
 const styles = {
   card: {
     border: '1px solid #ddd',
