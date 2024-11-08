@@ -14,6 +14,7 @@ const typeDefs = gql`
     category: String!
     rank: Int
     tags: [String]
+    date: Date!
   }
 
   type Auth {
@@ -34,6 +35,7 @@ const typeDefs = gql`
     category: String!
     rank: Int
     tags: [String]
+    date: Date
   }
 
   type Query {
