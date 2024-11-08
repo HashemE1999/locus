@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import Login from "./components/LoginForm.jsx";
 import Signup from "./components/SignupForm.jsx";
+import PointsOfInterest from "./components/PointsOfInterest.jsx";
 //Need to route for the home element
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/pointsofinterest",
+        element: <PointsOfInterest />,
       },
       {
         path: "/signup",
