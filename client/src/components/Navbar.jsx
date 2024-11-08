@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
-import SignUpForm from './SignupForm';
-import LoginForm from './LoginForm';
 
 import Auth from '../utils/auth';
 
@@ -12,8 +10,8 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
-        <Container fluid>
+      <Navbar className="bg-white border-gray-200 dark:bg-gray-900">
+        <Container fluid className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Navbar.Brand as={Link} to='/'>
             Amadeus Locations Search
           </Navbar.Brand>
@@ -49,10 +47,13 @@ const AppNavbar = () => {
           <Modal.Header closeButton>
             <Modal.Title id='signup-modal'>
               <Nav variant='pills'>
-                <Nav.Item>
+                <Nav.Item className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                  <Nav.Link href="/pointsofinterest">Points of Interest</Nav.Link>
+                </Nav.Item>
+                <Nav.Item className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                   <Nav.Link eventKey='login'>Login</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
+                <Nav.Item className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                   <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
                 </Nav.Item>
               </Nav>
