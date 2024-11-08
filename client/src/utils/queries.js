@@ -1,11 +1,17 @@
 import { gql } from "@apollo/client";
 
-export const GET_USER_TRIPS = gql`
-  query Me {
+// Define the query to fetch the user's trips and their attractions
+export const QUERY_USER_TRIPS = gql`
+  query getUserTrips {
     me {
+      _id
       trips {
+        _id
         attractions {
+          _id
           name
+          date
+          category
         }
       }
     }
