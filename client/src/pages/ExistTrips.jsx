@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { GET_USER_TRIPS } from "../utils/queries";
+import { QUERY_USER_TRIPS } from "../utils/queries";
 import AttractionCard from "../components/AttractionCard";
 
 const ExistTrips = () => {
-  const { loading, error, data } = useQuery(GET_USER_TRIPS);
+  const { loading, error, data } = useQuery(QUERY_USER_TRIPS);
 
   if (loading) return <p>Loading trips...</p>;
   if (error) return <p>Error: {error.message}</p>;
