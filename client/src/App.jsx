@@ -12,6 +12,8 @@ import { setContext } from "@apollo/client/link/context";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
+console.log(import.meta.env);
+
 // Constructing main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
