@@ -1,10 +1,41 @@
 import Calendar from "../components/Calendar";
-import PointsOfInterest from "../components/PointsOfInterest";
+import React, { useEffect, useState } from "react";
+import AttractionCard from "../components/AttractionCard";
+import { getLocation, getPoints } from "../utils/getLocation";
+import fetchPointsOfInterest from "../utils/fetchPointsOfInterest";
 
 const TripCreator = () => {
+  const [attractions, setAttractions] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!searchInput) {
+      // If the search box is empty, return false
+      return false;
+    }
+
+    try {
+      setLoading(true);
+      const data = await getLocation(searchInput);
+      const coords = await data.json();
+      const response = await fetchPointsOfInterest(
+        coords[0].lat,
+        coords[0].lon
+      );
+      const firstAttractions = response.slice(0, 8);
+      setAttractions(firstAttractions);
+      setLoading(false);
+      setSearchInput("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <>
-      <form className="max-w-md mx-auto mb-3">
+      <form onSubmit={handleFormSubmit} className="max-w-md mx-auto mb-3">
         <label
           htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -35,6 +66,8 @@ const TripCreator = () => {
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Paris"
             required
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
           <button
             type="submit"
@@ -47,7 +80,15 @@ const TripCreator = () => {
 
       <div className="grid grid-cols-2">
         <div className="">
-          <PointsOfInterest />
+          {loading ? (
+            <p>Loading attractions...</p>
+          ) : (
+            <div className="flex flex-row flex-wrap">
+              {attractions.map((attraction) => (
+                <AttractionCard key={attraction.id} attraction={attraction} />
+              ))}
+            </div>
+          )}
         </div>
         <div className="mx-6">
           <h1 className="font-bold text-3xl text-center my-2">MY TRIP</h1>
