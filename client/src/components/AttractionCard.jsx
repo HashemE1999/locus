@@ -1,35 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDraggable, useDndMonitor } from "@dnd-kit/core";
 
 const AttractionCard = ({ attraction }) => {
-  const { name, description, pictures = [], tags = [] } = attraction;
+  const { name, description, pictures = [], tags = [], id } = attraction;
 
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: name,
+      data: {
+        name: name,
+        pictures: pictures,
+      },
+    });
+
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
   // First three tags for display
   const displayTags = tags.slice(0, 3);
-
   return (
-    <div className="basis-1/3 block aspect-square max-w-xs" style={styles.card}>
-      {pictures.length ? (
-        <img
-          src={pictures[0]} // Placeholder; update if image data is available
-          alt={name}
-          style={styles.image}
-        />
-      ) : (
-        <img
-          src="https://via.placeholder.com/300x200" // Placeholder; update if image data is available
-          alt={name}
-          style={styles.image}
-        />
-      )}
+    <div
+      ref={setNodeRef}
+      {...listeners}
+      {...attributes}
+      className="basis-1/3 block aspect-square max-w-xs"
+      style={style}
+    >
+      <div style={styles.card}>
+        {pictures.length ? (
+          <img
+            src={pictures[0]} // Placeholder; update if image data is available
+            alt={name}
+            style={styles.image}
+          />
+        ) : (
+          <img
+            src="https://via.placeholder.com/300x200" // Placeholder; update if image data is available
+            alt={name}
+            style={styles.image}
+          />
+        )}
 
-      <div style={styles.content}>
-        <a style={styles.name}>{name}</a>
-        <div style={styles.tagContainer}>
-          {displayTags.map((tag, index) => (
-            <span key={index} style={styles.tag}>
-              {tag}
-            </span>
-          ))}
+        <div style={styles.content}>
+          <a style={styles.name}>{name}</a>
+          <div style={styles.tagContainer}>
+            {displayTags.map((tag, index) => (
+              <span key={index} style={styles.tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

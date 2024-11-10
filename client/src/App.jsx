@@ -7,13 +7,12 @@ import {
   InMemoryCache,
   createHttpLink,
 } from "@apollo/client";
-import PointsOfInterest from "./components/PointsOfInterest";
 import { setContext } from "@apollo/client/link/context";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
-console.log(import.meta.env);
-
+import { StoreProvider } from "./utils/GlobalState";
+import { TripProvider } from "./utils/TripState";
 // Constructing main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -40,11 +39,13 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <Navbar />
-        <div className="flex-column justify-center align-center min-100-vh bg-primary">
-          <Outlet />
-        </div>
-        <Footer />
+        <TripProvider>
+          <Navbar />
+          <div className="flex-column justify-center align-center min-100-vh bg-primary">
+            <Outlet />
+          </div>
+          <Footer />
+        </TripProvider>
       </ApolloProvider>
     </>
   );
