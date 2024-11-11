@@ -7,7 +7,7 @@ export const CalendarSquare = ({ day }) => {
     id: day.toString(),
   });
   const style = {
-    color: isOver ? "green" : undefined,
+    backgroundColor: isOver ? "gray" : undefined,
   };
 
   const [attraction, setAttraction] = useState("");
@@ -34,7 +34,7 @@ export const CalendarSquare = ({ day }) => {
       className="basis-1/4 block aspect-square max-w-xs p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
     >
       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        {format(day, "dd-MMM")}
+        {day.toDateString()}
       </h5>
       <h1>{attraction}</h1>
       {attraction ? <button onClick={reset}>Clear</button> : null}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_TRIP } from "../utils/mutations";
 import AttractionCard from "../components/AttractionCard";
@@ -7,6 +7,7 @@ import fetchPointsOfInterest from "../utils/fetchPointsOfInterest";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import CalendarSquare from "../components/CalendarSquare";
 import { startOfToday, add, eachDayOfInterval, format } from "date-fns";
+import Datepicker from "react-tailwindcss-datepicker";
 
 const TripCreator = () => {
   const [currentTrip, setCurrentTrip] = useState([]);
@@ -18,11 +19,12 @@ const TripCreator = () => {
   const [loading, setLoading] = useState(false);
 
   const today = startOfToday();
-  const [startWeek, setStartWeek] = useState(() => format(today, "dd-MMM"));
 
   let endOfWeek = add(today, {
     weeks: 1,
   });
+
+  const [selectedDate, setSelectedDate] = useState(today);
 
   let currWeek = eachDayOfInterval({
     start: today,
@@ -31,17 +33,24 @@ const TripCreator = () => {
 
   const [week, setWeek] = useState(currWeek);
 
-  const getWeek = () => {
-    let endOfWeek = add(startWeek, {
+  const handleDateChange = (date) => {
+    setSelectedDate(date.startDate);
+    console.log(selectedDate);
+  };
+
+  useEffect(() => {
+    let endOfWeek = add(selectedDate, {
       weeks: 1,
     });
+    console.log(endOfWeek);
     setWeek(
       eachDayOfInterval({
-        start: today,
+        start: selectedDate,
         end: endOfWeek,
       })
     );
-  };
+    console.log(week);
+  }, [selectedDate]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -149,10 +158,21 @@ const TripCreator = () => {
               <div className="mt-8 text-center">
                 <button
                   onClick={handleAddTrip}
-                  className="text-xl font-semibold"
+                  className="text-xl font-semibold mb-4 bg-darkestGreen p-2 rounded-md text-white hover:bg-lighterGreen"
                 >
-                  SAVE TRIP!
+                  SAVE TRIP
                 </button>
+                <div>
+                  <Datepicker
+                    asSingle={true}
+                    useRange={false}
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                  />
+                  {selectedDate && (
+                    <p>Selected Date: {selectedDate.toDateString()}</p>
+                  )}
+                </div>
               </div>
               <div className="flex flex-row flex-wrap">
                 {week.map((day) => (
