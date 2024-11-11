@@ -137,11 +137,11 @@ const TripCreator = () => {
           </form>
 
           <div className="grid grid-cols-2">
-            <div className="text-center">
+            <div className="text-center z-10">
               {loading ? (
                 <l-ring></l-ring>
               ) : (
-                <div className="flex flex-row flex-wrap max-h-screen overflow-y-auto">
+                <div className="flex flex-row flex-wrap max-h-screen overflow-y-auto overflow-x-visible">
                   {attractions.map((attraction) => (
                     <AttractionCard
                       key={attraction.id}
@@ -151,35 +151,33 @@ const TripCreator = () => {
                 </div>
               )}
             </div>
-            <div className="mx-6">
-              <div className="fixed">
-                <h1 className="font-bold text-3xl text-center my-2">MY TRIP</h1>
-                <div className="mt-8 text-center">
-                  <button
-                    onClick={handleAddTrip}
-                    className="text-xl font-semibold mb-4 bg-darkestGreen p-2 rounded-md text-white hover:bg-lighterGreen"
-                  >
-                    SAVE TRIP
-                  </button>
-                  <div>
-                    <Datepicker
-                      asSingle={true}
-                      useRange={false}
-                      selected={selectedDate}
-                      onChange={handleDateChange}
-                    />
-                    {selectedDate && (
-                      <p>Selected Date: {selectedDate.toDateString()}</p>
-                    )}
+            <div className="mx-6 z-0">
+              <h1 className="font-bold text-3xl text-center my-2">MY TRIP</h1>
+              <div className="mt-8 text-center">
+                <button
+                  onClick={handleAddTrip}
+                  className="text-xl font-semibold mb-4 bg-darkestGreen p-2 rounded-md text-white hover:bg-lighterGreen"
+                >
+                  SAVE TRIP
+                </button>
+                <div>
+                  <Datepicker
+                    asSingle={true}
+                    useRange={false}
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                  />
+                  {selectedDate && (
+                    <p>Selected Date: {selectedDate.toDateString()}</p>
+                  )}
+                </div>
+              </div>
+              <div className="flex flex-row flex-wrap">
+                {week.map((day) => (
+                  <div className="basis-1/4" key={day}>
+                    <CalendarSquare day={day} />
                   </div>
-                </div>
-                <div className="flex flex-row flex-wrap">
-                  {week.map((day) => (
-                    <div className="basis-1/4" key={day}>
-                      <CalendarSquare day={day} />
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
           </div>
