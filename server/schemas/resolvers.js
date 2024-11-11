@@ -77,6 +77,14 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    editTrip: async (parent, { tripId }, context) => {
+      // Edit a trip by ID
+      if (context.user) {
+        const trip = await Trip.findByIdAndUpdate(tripId);
+        return trip
+      }
+      throw AuthenticationError;
+    },
   },
 };
 
