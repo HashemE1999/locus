@@ -141,7 +141,7 @@ const TripCreator = () => {
               {loading ? (
                 <l-ring></l-ring>
               ) : (
-                <div className="flex flex-row flex-wrap ">
+                <div className="flex flex-row flex-wrap max-h-screen overflow-y-auto">
                   {attractions.map((attraction) => (
                     <AttractionCard
                       key={attraction.id}
