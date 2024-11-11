@@ -6,7 +6,7 @@ const AttractionCard = ({ attraction }) => {
 
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
-      id: name,
+      id: id,
       data: {
         name: name,
         pictures: pictures,

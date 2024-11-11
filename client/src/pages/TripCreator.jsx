@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_TRIP } from "../utils/mutations";
 import AttractionCard from "../components/AttractionCard";
 import { getLocation, getPoints } from "../utils/getLocation";
 import fetchPointsOfInterest from "../utils/fetchPointsOfInterest";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import CalendarSquare from "../components/CalendarSquare";
 import { startOfToday, add, eachDayOfInterval, format } from "date-fns";
-import { useTripContext } from "../utils/TripState";
-import { ADD_ATTRACTION } from "../utils/tripActions";
 
 const TripCreator = () => {
-  const [currentTrip, dispatch] = useTripContext();
+  const [currentTrip, setCurrentTrip] = useState([]);
+
+  const [addTrip, { error, data }] = useMutation(ADD_TRIP);
 
   const [attractions, setAttractions] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -65,6 +67,21 @@ const TripCreator = () => {
       console.error(err);
     }
   };
+
+  const handleAddTrip = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await addTrip({
+        variables: {
+          attractions: currentTrip,
+        },
+      });
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <>
       <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
@@ -125,6 +142,11 @@ const TripCreator = () => {
           </div>
           <div className="mx-6">
             <h1 className="font-bold text-3xl text-center my-2">MY TRIP</h1>
+            <div className="mt-8 text-center">
+              <button onClick={handleAddTrip} className="text-xl font-semibold">
+                SAVE TRIP!
+              </button>
+            </div>
             <div className="flex flex-row flex-wrap">
               {week.map((day) => (
                 <div className="basis-1/4" key={day}>
@@ -141,11 +163,15 @@ const TripCreator = () => {
   function handleDragEnd(event) {
     const { over, active } = event;
     console.log(over, active);
-    dispatch({
-      type: ADD_ATTRACTION,
-      day: over.id,
-      name: active.id,
-    });
+    setCurrentTrip([
+      ...currentTrip,
+      {
+        name: active.data.current.name,
+        attractionId: parseInt(active.id),
+        date: over.id,
+      },
+    ]);
+    console.log(currentTrip);
   }
 };
 

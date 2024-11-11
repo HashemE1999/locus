@@ -16,11 +16,16 @@ export const CalendarSquare = ({ day }) => {
     onDragEnd(event) {
       const { over, active } = event;
       if (over.id == day.toString()) {
-        const attraction = active.id;
+        const attraction = active.data.current.name;
         setAttraction(attraction);
       }
     },
   });
+
+  function reset(event) {
+    event.preventDefault();
+    setAttraction("");
+  }
 
   return (
     <div
@@ -32,6 +37,7 @@ export const CalendarSquare = ({ day }) => {
         {format(day, "dd-MMM")}
       </h5>
       <h1>{attraction}</h1>
+      {attraction ? <button onClick={reset}>Clear</button> : null}
     </div>
   );
 };
