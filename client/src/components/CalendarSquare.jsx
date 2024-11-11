@@ -7,31 +7,48 @@ export const CalendarSquare = ({ day }) => {
     id: day.toString(),
   });
   const style = {
-    color: isOver ? "green" : undefined,
+    backgroundColor: isOver ? "gray" : undefined,
   };
 
-  const [attraction, setAttraction] = useState("");
+  const [attractions, setAttractions] = useState("");
 
   useDndMonitor({
     onDragEnd(event) {
       const { over, active } = event;
       if (over.id == day.toString()) {
-        const attraction = active.id;
-        setAttraction(attraction);
+        const attraction = active.data.current.name;
+        setAttractions([...attractions, attraction]);
       }
     },
   });
+
+  function reset(event) {
+    event.preventDefault();
+    setAttractions([]);
+  }
 
   return (
     <div
       ref={setNodeRef}
       style={style}
-      className="basis-1/4 block aspect-square max-w-xs p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      className="basis-1/4 relative block aspect-square max-w-xs p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
     >
       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        {format(day, "dd-MMM")}
+        {day.toDateString()}
       </h5>
-      <h1>{attraction}</h1>
+      {attractions.length
+        ? attractions.map((attraction) => (
+            <h1 key={attraction} className="text-center text-xs bg-mint mb-1">
+              {attraction}
+            </h1>
+          ))
+        : null}
+      <button
+        className="absolute bottom-2 bg-red-300 hover:bg-red-200 p-1 rounded-md"
+        onClick={reset}
+      >
+        CLEAR
+      </button>
     </div>
   );
 };

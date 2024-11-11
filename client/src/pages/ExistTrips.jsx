@@ -9,6 +9,7 @@ const ExistTrips = () => {
 
   if (loading) return <p>Loading trips...</p>;
   if (error) return <p>Error: {error.message}</p>;
+  console.log(data);
 
   const trips = data?.me?.trips || [];
 
@@ -19,9 +20,7 @@ const ExistTrips = () => {
         {trips.length > 0 ? (
           trips.map((trip) => (
             <div key={trip._id} className="p-4 border rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-2">
-                {trip.destinationName}
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">{trip.name}</h3>
               <div className="flex flex-wrap gap-4">
                 {trip.attractions &&
                   trip.attractions.map((attraction) => (
@@ -39,7 +38,7 @@ const ExistTrips = () => {
       </div>
 
       {/* Button to create a new trip */}
-      <Link to="/create-trip">
+      <Link to="/creator">
         <button className="fixed bottom-6 right-6 bg-blue-500 text-white p-3 rounded-full shadow-lg">
           Create New Trip
         </button>

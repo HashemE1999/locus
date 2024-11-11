@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useDraggable, useDndMonitor } from "@dnd-kit/core";
+import { useDraggable } from "@dnd-kit/core";
 
 const AttractionCard = ({ attraction }) => {
   const { name, description, pictures = [], tags = [], id } = attraction;
 
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
-      id: name,
+      id: id,
       data: {
         name: name,
         pictures: pictures,
@@ -15,7 +15,8 @@ const AttractionCard = ({ attraction }) => {
 
   const style = transform
     ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 10px)`,
+        zIndex: 30,
       }
     : undefined;
   // First three tags for display
@@ -25,7 +26,7 @@ const AttractionCard = ({ attraction }) => {
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className="basis-1/3 block aspect-square max-w-xs"
+      className="basis-1/3 block aspect-square max-w-xs z-30"
       style={style}
     >
       <div style={styles.card}>
@@ -67,6 +68,7 @@ const styles = {
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     textAlign: "center",
     overflow: "hidden",
+    backgroundColor: "beige",
   },
   image: {
     width: "100%",

@@ -1,4 +1,5 @@
 const { User, Trip } = require("../models");
+const { findById } = require("../models/Trip");
 const { signToken, AuthenticationError } = require("../utils/auth");
 const DateScalar = require("./DateScalar");
 
@@ -8,9 +9,15 @@ const resolvers = {
     // Other query resolvers
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("trips");
+        const user = await User.findOne({ _id: context.user._id }).populate(
+          "trips"
+        );
+        return user;
       }
       throw AuthenticationError;
+    },
+    getTrip: async (parent, { tripId }) => {
+      return Trip.findOne({ _id: tripId });
     },
   },
 
@@ -42,13 +49,15 @@ const resolvers = {
 
       return { token, user };
     },
+
     addTrip: async (parent, { attractions }, context) => {
       // Create a new trip with the provided attractions
       if (context.user) {
         const trip = await Trip.create({ attractions });
+        console.log(trip);
         const user = await User.findOneAndUpdate(
-          { _id: context.user_id },
-          { $addToSet: trip },
+          { _id: context.user._id },
+          { $addToSet: { trips: trip._id } },
           { new: true }
         );
         return trip;
@@ -60,7 +69,7 @@ const resolvers = {
       if (context.user) {
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedTrips: tripId } },
+          { $pull: { trips: tripId } },
           { new: true }
         );
         const trip = await Trip.findByIdAndDelete(tripId);

@@ -1,12 +1,8 @@
 const { Schema, model } = require("mongoose");
+const AttractionSchema = require("./Attraction");
 
 const tripSchema = new Schema({
-  attractions: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Attraction",
-    },
-  ],
+  attractions: [AttractionSchema],
 });
 
 const Trip = model("Trip", tripSchema);

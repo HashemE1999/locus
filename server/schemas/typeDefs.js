@@ -11,10 +11,8 @@ const typeDefs = gql`
   type Attraction {
     _id: ID!
     name: String!
-    category: String!
-    rank: Int
-    tags: [String]
     date: Date!
+    attractionId: Int
   }
 
   type Auth {
@@ -27,14 +25,12 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    trips: [Trip]
+    trips: [Trip!]
   }
 
   input AttractionInput {
     name: String!
-    category: String!
-    rank: Int
-    tags: [String]
+    attractionId: Int!
     date: Date
   }
 
@@ -42,6 +38,7 @@ const typeDefs = gql`
     getAllUsers: [User]
     getUser(id: ID!): User
     me: User
+    getTrip(id: ID!): Trip
   }
 
   type Mutation {

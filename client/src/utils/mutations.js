@@ -22,3 +22,16 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_TRIP = gql`
+  mutation Mutation($attractions: [AttractionInput]) {
+    addTrip(attractions: $attractions) {
+      attractions {
+        attractionId
+        date
+        name
+      }
+      _id
+    }
+  }
+`;

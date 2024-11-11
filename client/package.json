@@ -16,13 +16,16 @@
     "@dnd-kit/utilities": "^3.2.2",
     "axios": "^1.7.7",
     "bootstrap": "^5.2.3",
+    "dayjs": "^1.11.13",
     "dotenv": "^16.4.5",
     "graphql": "^16.6.0",
     "jwt-decode": "^3.1.2",
+    "ldrs": "^1.0.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.2"
+    "react-router-dom": "^6.11.2",
+    "react-tailwindcss-datepicker": "^1.7.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

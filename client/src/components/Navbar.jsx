@@ -22,7 +22,7 @@ const AppNavbar = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar" className="d-flex flex-row-reverse">
-            <Nav className="ml-auto d-flex">
+            <div className="ml-auto d-flex">
               <Nav.Link as={Link} to="/">
                 Search For Locations
               </Nav.Link>
@@ -39,7 +39,7 @@ const AppNavbar = () => {
                   Login/Sign Up
                 </Nav.Link>
               )}
-            </Nav>
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>

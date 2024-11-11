@@ -10,8 +10,8 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import Mountains from "./assets/mountains.svg";
 
-import { StoreProvider } from "./utils/GlobalState";
 import { TripProvider } from "./utils/TripState";
 // Constructing main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -39,13 +39,17 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <TripProvider>
-          <Navbar />
-          <div className="flex-column justify-center align-center min-100-vh bg-primary">
+        <Navbar />
+
+        <div
+          className="min-h-screen relative bg-center w-screen flex flex-col justify-center"
+          style={{ backgroundImage: `url(${Mountains})` }}
+        >
+          <main className="flex-grow">
             <Outlet />
-          </div>
+          </main>
           <Footer />
-        </TripProvider>
+        </div>
       </ApolloProvider>
     </>
   );

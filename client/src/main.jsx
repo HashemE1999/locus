@@ -8,6 +8,7 @@ import Signup from "./components/SignupForm.jsx";
 import PointsOfInterest from "./components/PointsOfInterest.jsx";
 import ExistTrips from "./pages/ExistTrips";
 import TripCreator from "./pages/TripCreator.jsx";
+import Landing from "./pages/Landing.jsx";
 //Need to route for the home element
 
 const router = createBrowserRouter([
@@ -18,15 +19,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Welcome to Locus!</h1>,
+        element: <Landing />,
       },
       {
         path: "/login",
         element: <Login />,
-      },
-      {
-        path: "/pointsofinterest",
-        element: <PointsOfInterest />,
       },
       {
         path: "/signup",
