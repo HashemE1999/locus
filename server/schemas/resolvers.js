@@ -71,11 +71,6 @@ const resolvers = {
     editTrip: async (parent, { tripId }, context) => {
       // Edit a trip by ID
       if (context.user) {
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: {savedTrips: tripId } },
-          { new: true }
-        );
         const trip = await Trip.findByIdAndUpdate(tripId);
         return trip
       }
