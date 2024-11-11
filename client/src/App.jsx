@@ -1,11 +1,18 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
 // Importing necessary dependencies to initialize Apollo Server
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
-import PointsOfInterest from './components/PointsOfInterest';
-import { setContext } from '@apollo/client/link/context';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
+import { StoreProvider } from "./utils/GlobalState";
+import { TripProvider } from "./utils/TripState";
 // Constructing main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -32,15 +39,14 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <div className="flex-column justify-center align-center min-100-vh bg-primary">
-          <Outlet />
-        </div>
-        <Footer />
+        <TripProvider>
+          <Navbar />
+          <div className="flex-column justify-center align-center min-100-vh bg-primary">
+            <Outlet />
+          </div>
+          <Footer />
+        </TripProvider>
       </ApolloProvider>
-      <div>
-    <h1>Explore Points of Interest</h1>
-      <PointsOfInterest />
-    </div>
     </>
   );
 }

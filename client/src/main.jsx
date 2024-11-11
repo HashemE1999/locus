@@ -6,6 +6,8 @@ import App from "./App.jsx";
 import Login from "./components/LoginForm.jsx";
 import Signup from "./components/SignupForm.jsx";
 import PointsOfInterest from "./components/PointsOfInterest.jsx";
+import ExistTrips from "./pages/ExistTrips";
+import TripCreator from "./pages/TripCreator.jsx";
 //Need to route for the home element
 
 const router = createBrowserRouter([
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />,
+      },
+      {
+        path: "/mytrips",
+        element: <ExistTrips />,
+      },
+      {
+        path: "/creator",
+        element: <TripCreator />,
       },
     ],
   },
