@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDraggable, useDndMonitor } from "@dnd-kit/core";
+import { useDraggable } from "@dnd-kit/core";
 
 const AttractionCard = ({ attraction }) => {
   const { name, description, pictures = [], tags = [], id } = attraction;
@@ -25,7 +25,7 @@ const AttractionCard = ({ attraction }) => {
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className="basis-1/3 block aspect-square max-w-xs"
+      className="basis-1/3 block aspect-square max-w-xs z-30"
       style={style}
     >
       <div style={styles.card}>

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_TRIP } from "../utils/mutations";
 import AttractionCard from "../components/AttractionCard";
-import { getLocation, getPoints } from "../utils/getLocation";
+import { getLocation } from "../utils/getLocation";
 import fetchPointsOfInterest from "../utils/fetchPointsOfInterest";
-import { DndContext, closestCorners } from "@dnd-kit/core";
+import { DndContext } from "@dnd-kit/core";
 import CalendarSquare from "../components/CalendarSquare";
 import { startOfToday, add, eachDayOfInterval, format } from "date-fns";
 import Datepicker from "react-tailwindcss-datepicker";
@@ -66,7 +66,7 @@ const TripCreator = () => {
         coords[0].lat,
         coords[0].lon
       );
-      const firstAttractions = response.slice(0, 6);
+      const firstAttractions = response.slice(0, 20);
       setAttractions(firstAttractions);
       setLoading(false);
       setSearchInput("");
@@ -91,7 +91,7 @@ const TripCreator = () => {
 
   return (
     <>
-      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+      <DndContext onDragEnd={handleDragEnd}>
         <div>
           <form onSubmit={handleFormSubmit} className="max-w-md mx-auto mb-3">
             <label
@@ -152,32 +152,34 @@ const TripCreator = () => {
               )}
             </div>
             <div className="mx-6">
-              <h1 className="font-bold text-3xl text-center my-2">MY TRIP</h1>
-              <div className="mt-8 text-center">
-                <button
-                  onClick={handleAddTrip}
-                  className="text-xl font-semibold mb-4 bg-darkestGreen p-2 rounded-md text-white hover:bg-lighterGreen"
-                >
-                  SAVE TRIP
-                </button>
-                <div>
-                  <Datepicker
-                    asSingle={true}
-                    useRange={false}
-                    selected={selectedDate}
-                    onChange={handleDateChange}
-                  />
-                  {selectedDate && (
-                    <p>Selected Date: {selectedDate.toDateString()}</p>
-                  )}
-                </div>
-              </div>
-              <div className="flex flex-row flex-wrap">
-                {week.map((day) => (
-                  <div className="basis-1/4" key={day}>
-                    <CalendarSquare day={day} />
+              <div className="fixed">
+                <h1 className="font-bold text-3xl text-center my-2">MY TRIP</h1>
+                <div className="mt-8 text-center">
+                  <button
+                    onClick={handleAddTrip}
+                    className="text-xl font-semibold mb-4 bg-darkestGreen p-2 rounded-md text-white hover:bg-lighterGreen"
+                  >
+                    SAVE TRIP
+                  </button>
+                  <div>
+                    <Datepicker
+                      asSingle={true}
+                      useRange={false}
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                    />
+                    {selectedDate && (
+                      <p>Selected Date: {selectedDate.toDateString()}</p>
+                    )}
                   </div>
-                ))}
+                </div>
+                <div className="flex flex-row flex-wrap">
+                  {week.map((day) => (
+                    <div className="basis-1/4" key={day}>
+                      <CalendarSquare day={day} />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

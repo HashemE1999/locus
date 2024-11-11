@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="flex items-center justify-center absolute bottom-0 w-full bg-gray-800 text-white py-6 mt-12">
+    <footer className="absolute bottom-0 w-full bg-gray-800 text-white py-6 mt-12">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center text-center">
           {/* Locus Branding */}
@@ -22,9 +21,6 @@ const Footer = () => {
             className="mt-4 text-blue-400 hover:text-blue-600 transition duration-300"
           >
             Visit our repository!
-          </a>
-          <a href="https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/">
-            Background source
           </a>
         </div>
       </div>
