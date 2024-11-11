@@ -26,10 +26,6 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/pointsofinterest",
-        element: <PointsOfInterest />,
-      },
-      {
         path: "/signup",
         element: <Signup />,
       },
