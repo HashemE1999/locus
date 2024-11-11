@@ -38,7 +38,7 @@ const ExistTrips = () => {
       </div>
 
       {/* Button to create a new trip */}
-      <Link to="/create-trip">
+      <Link to="/creator">
         <button className="fixed bottom-6 right-6 bg-blue-500 text-white p-3 rounded-full shadow-lg">
           Create New Trip
         </button>
