@@ -8,6 +8,7 @@ import { DndContext, closestCorners } from "@dnd-kit/core";
 import CalendarSquare from "../components/CalendarSquare";
 import { startOfToday, add, eachDayOfInterval, format } from "date-fns";
 import Datepicker from "react-tailwindcss-datepicker";
+import "ldrs/ring";
 
 const TripCreator = () => {
   const [currentTrip, setCurrentTrip] = useState([]);
@@ -35,21 +36,18 @@ const TripCreator = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date.startDate);
-    console.log(selectedDate);
   };
 
   useEffect(() => {
     let endOfWeek = add(selectedDate, {
       weeks: 1,
     });
-    console.log(endOfWeek);
     setWeek(
       eachDayOfInterval({
         start: selectedDate,
         end: endOfWeek,
       })
     );
-    console.log(week);
   }, [selectedDate]);
 
   const handleFormSubmit = async (event) => {
@@ -68,7 +66,7 @@ const TripCreator = () => {
         coords[0].lat,
         coords[0].lon
       );
-      const firstAttractions = response.slice(0, 8);
+      const firstAttractions = response.slice(0, 6);
       setAttractions(firstAttractions);
       setLoading(false);
       setSearchInput("");
@@ -139,9 +137,9 @@ const TripCreator = () => {
           </form>
 
           <div className="grid grid-cols-2">
-            <div className="">
+            <div className="text-center">
               {loading ? (
-                <p>Loading attractions...</p>
+                <l-ring></l-ring>
               ) : (
                 <div className="flex flex-row flex-wrap ">
                   {attractions.map((attraction) => (

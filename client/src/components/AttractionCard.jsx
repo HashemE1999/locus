@@ -67,6 +67,7 @@ const styles = {
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     textAlign: "center",
     overflow: "hidden",
+    backgroundColor: "beige",
   },
   image: {
     width: "100%",

@@ -42,7 +42,7 @@ function App() {
         <Navbar />
 
         <div
-          className="min-h-screen relative bg-center w-screen bg-repeat flex flex-col justify-center"
+          className="min-h-screen relative bg-center w-screen flex flex-col justify-center"
           style={{ backgroundImage: `url(${Mountains})` }}
         >
           <main className="flex-grow">
