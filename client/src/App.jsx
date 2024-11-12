@@ -12,7 +12,6 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Mountains from "./assets/mountains.svg";
 
-import { TripProvider } from "./utils/TripState";
 // Constructing main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",

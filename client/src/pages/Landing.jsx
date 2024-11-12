@@ -1,5 +1,6 @@
 import traveler from "../assets/undraw_exploring_re_grb8.svg";
 import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
 
 // SOURCE USED: https://tailwindflex.com/@limaa-m/basic-hero-secction
 export const Landing = () => {
@@ -14,14 +15,25 @@ export const Landing = () => {
             A quick, easy, and intuitive travel planning application
           </p>
           <p className="mt-8 md:mt-12">
-            <Link to="/creator">
-              <button
-                type="button"
-                className="py-4 px-12 bg-darkestGreen hover:bg-lighterGreen rounded text-white"
-              >
-                Get Started
-              </button>
-            </Link>
+            {Auth.loggedIn() ? (
+              <Link to="/creator">
+                <button
+                  type="button"
+                  className="py-4 px-12 bg-darkestGreen hover:bg-lighterGreen rounded text-white"
+                >
+                  Get Started
+                </button>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <button
+                  type="button"
+                  className="py-4 px-12 bg-darkestGreen hover:bg-lighterGreen rounded text-white"
+                >
+                  Get Started
+                </button>
+              </Link>
+            )}
           </p>
         </div>
         <div className="lg:w-1/2">

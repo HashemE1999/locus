@@ -9,6 +9,7 @@ import CalendarSquare from "../components/CalendarSquare";
 import { startOfToday, add, eachDayOfInterval, format } from "date-fns";
 import Datepicker from "react-tailwindcss-datepicker";
 import "ldrs/ring";
+import Auth from "../utils/auth";
 
 const TripCreator = () => {
   const [currentTrip, setCurrentTrip] = useState([]);
@@ -159,12 +160,17 @@ const TripCreator = () => {
             <div className="mx-6 z-0">
               <h1 className="font-bold text-3xl text-center my-2">MY TRIP</h1>
               <div className="mt-8 text-center">
-                <button
-                  onClick={handleAddTrip}
-                  className="text-xl font-semibold mb-4 bg-darkestGreen p-2 rounded-md text-white hover:bg-lighterGreen"
-                >
-                  SAVE TRIP
-                </button>
+                {Auth.loggedIn() ? (
+                  <button
+                    onClick={handleAddTrip}
+                    className="text-xl font-semibold mb-4 bg-darkestGreen p-2 rounded-md text-white hover:bg-lighterGreen"
+                  >
+                    SAVE TRIP
+                  </button>
+                ) : (
+                  <p>You must be logged in to save trips!</p>
+                )}
+
                 {showSuccess && (
                   <p>
                     Trip saved successfully! Go to My Trips to check it out.
