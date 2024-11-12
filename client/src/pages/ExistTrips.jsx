@@ -19,7 +19,6 @@ const ExistTrips = () => {
   if (loading) return <p>Loading trips...</p>;
 
   const trips = data?.me?.trips || [];
-  console.log(trips);
 
   const handleDeleteTrip = async () => {
     try {

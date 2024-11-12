@@ -17,7 +17,6 @@ const resolvers = {
       throw AuthenticationError;
     },
     getTrip: async (parent, { tripId }) => {
-      console.log("hai");
       const trip = await Trip.findById(tripId);
       return trip;
     },
@@ -56,7 +55,6 @@ const resolvers = {
       // Create a new trip with the provided attractions
       if (context.user) {
         const trip = await Trip.create({ attractions });
-        console.log(trip);
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { trips: trip._id } },

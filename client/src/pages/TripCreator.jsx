@@ -198,7 +198,6 @@ const TripCreator = () => {
 
   function handleDragEnd(event) {
     const { over, active } = event;
-    console.log(over, active);
     setCurrentTrip([
       ...currentTrip,
       {
@@ -207,7 +206,6 @@ const TripCreator = () => {
         date: over.id,
       },
     ]);
-    console.log(currentTrip);
   }
 };
 
