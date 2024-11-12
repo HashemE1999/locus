@@ -51,7 +51,7 @@ const LoginForm = () => {
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Log in
+                Create an account
               </h1>
               <form
                 novalidate
@@ -83,6 +83,28 @@ const LoginForm = () => {
                 </div>
                 <div>
                   <label
+                    for="username"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Username
+                  </label>
+                  <input
+                    type="username"
+                    name="username"
+                    id="username"
+                    placeholder="username"
+                    className="peer invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required=""
+                    onChange={handleInputChange}
+                    value={userFormData.username}
+                    pattern=".{1,}"
+                  />
+                  <span class="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                    Username cannot be blank
+                  </span>
+                </div>
+                <div>
+                  <label
                     for="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
@@ -107,17 +129,8 @@ const LoginForm = () => {
                   type="submit"
                   className="group-invalid:pointer-events-none group-invalid:opacity-30 w-full text-black bg-lighterGreen hover:bg-mint focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  Log in
+                  Create an account
                 </button>
-                <div>
-                  Don't have an account yet?{" "}
-                  <Link
-                    className="text-darkestGreen hover:text-lighterGreen"
-                    to="/signup"
-                  >
-                    Sign up instead.
-                  </Link>
-                </div>
               </form>
             </div>
           </div>
