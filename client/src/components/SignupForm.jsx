@@ -3,7 +3,6 @@ import { useState } from "react";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
-import { Link } from "react-router-dom";
 // Tutorial used: https://dev.to/deyemiobaa/adding-custom-validation-to-a-form-with-tailwindcss-1e7d
 const SignupForm = () => {
   // set initial form state
@@ -140,15 +139,6 @@ const SignupForm = () => {
                 >
                   Create an account
                 </button>
-                <div>
-                  Have an account already?
-                  <Link
-                    className="text-darkestGreen hover:text-lighterGreen"
-                    to="/login"
-                  >
-                    Log in instead.
-                  </Link>
-                </div>
               </form>
             </div>
           </div>
