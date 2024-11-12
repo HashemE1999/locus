@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="absolute bottom-0 w-full bg-gray-800 text-white py-6 mt-12">
+    <footer className="absolute bottom-0 w-full text-black py-6 mt-12">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center text-center">
           {/* Locus Branding */}
@@ -18,7 +18,7 @@ const Footer = () => {
             href="https://github.com/HashemE1999/locus.git"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 text-blue-400 hover:text-blue-600 transition duration-300"
+            className="mt-2 text-black hover:text-gray-800 transition duration-300"
           >
             Visit our repository!
           </a>
