@@ -9,6 +9,7 @@ import PointsOfInterest from "./components/PointsOfInterest.jsx";
 import ExistTrips from "./pages/ExistTrips";
 import TripCreator from "./pages/TripCreator.jsx";
 import Landing from "./pages/Landing.jsx";
+import TripEditor from "./pages/TripEditor.jsx";
 //Need to route for the home element
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/creator",
         element: <TripCreator />,
+      },
+      {
+        path: "trip/:tripId",
+        element: <TripEditor />,
       },
     ],
   },

@@ -17,7 +17,9 @@ const resolvers = {
       throw AuthenticationError;
     },
     getTrip: async (parent, { tripId }) => {
-      return Trip.findOne({ _id: tripId });
+      console.log("hai");
+      const trip = await Trip.findById(tripId);
+      return trip;
     },
   },
 
@@ -81,7 +83,7 @@ const resolvers = {
       // Edit a trip by ID
       if (context.user) {
         const trip = await Trip.findByIdAndUpdate(tripId);
-        return trip
+        return trip;
       }
       throw AuthenticationError;
     },

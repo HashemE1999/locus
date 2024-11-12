@@ -6,7 +6,7 @@ const typeDefs = gql`
   type Trip {
     _id: ID!
     attractions: [Attraction]
-    dateCreated: Date
+    created: Date
   }
 
   type Attraction {
@@ -39,7 +39,7 @@ const typeDefs = gql`
     getAllUsers: [User]
     getUser(id: ID!): User
     me: User
-    getTrip(id: ID!): Trip
+    getTrip(tripId: ID!): Trip
   }
 
   type Mutation {

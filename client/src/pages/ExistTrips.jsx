@@ -8,14 +8,14 @@ import { REMOVE_TRIP } from "../utils/mutations";
 const ExistTrips = () => {
   const { loading, data } = useQuery(QUERY_USER_TRIPS);
 
+  const [removeTrip, { error }] = useMutation(REMOVE_TRIP, {
+    refetchQueries: [QUERY_USER_TRIPS, "me"],
+  });
+
   if (loading) return <p>Loading trips...</p>;
 
   const trips = data?.me?.trips || [];
   console.log(trips);
-
-  const [removeTrip, { error }] = useMutation(REMOVE_TRIP, {
-    refetchQueries: [QUERY_USER_TRIPS, "me"],
-  });
 
   const handleDeleteTrip = async (tripId) => {
     try {
@@ -27,6 +27,11 @@ const ExistTrips = () => {
     }
   };
 
+  const formatDate = (dateInput) => {
+    let newDate = new Date(dateInput);
+    return newDate.toDateString();
+  };
+
   return (
     <div className="container mx-auto my-6">
       <h1 className="text-2xl font-semibold mb-4">My Trips</h1>
@@ -34,7 +39,7 @@ const ExistTrips = () => {
         {trips.length > 0 ? (
           trips.map((trip) => (
             <div key={trip._id} className="">
-              <h1 className="">Trip created on {trip.created}</h1>
+              <h1 className="">Trip created on {formatDate(trip.created)}</h1>
               <div className="flex flex-row gap-x-4">
                 <button
                   className="uppercase bg-red-300 p-1 rounded-md hover:bg-red-200"
@@ -42,9 +47,12 @@ const ExistTrips = () => {
                 >
                   Delete trip
                 </button>
-                <button className="uppercase bg-lighterGreen hover:bg-mint p-1 rounded-md">
+                <Link
+                  to={`/trip/${trip._id}`}
+                  className="uppercase bg-lighterGreen hover:bg-mint p-1 rounded-md"
+                >
                   Edit trip
-                </button>
+                </Link>
               </div>
             </div>
           ))
