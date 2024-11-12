@@ -129,7 +129,7 @@ const LoginForm = () => {
                   type="submit"
                   className="group-invalid:pointer-events-none group-invalid:opacity-30 w-full text-black bg-lighterGreen hover:bg-mint focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  Create an account
+                  Log In
                 </button>
               </form>
             </div>
