@@ -6,6 +6,7 @@ const typeDefs = gql`
   type Trip {
     _id: ID!
     attractions: [Attraction]
+    dateCreated: Date
   }
 
   type Attraction {

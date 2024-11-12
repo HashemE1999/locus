@@ -8,6 +8,7 @@ export const QUERY_USER_TRIPS = gql`
         attractions {
           name
         }
+        _id
       }
       username
     }
