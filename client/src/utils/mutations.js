@@ -35,3 +35,11 @@ export const ADD_TRIP = gql`
     }
   }
 `;
+
+export const REMOVE_TRIP = gql`
+  mutation Mutation($tripId: ID!) {
+    removeTrip(tripId: $tripId) {
+      _id
+    }
+  }
+`;

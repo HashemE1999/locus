@@ -8,8 +8,23 @@ export const QUERY_USER_TRIPS = gql`
         attractions {
           name
         }
+        _id
+        created
       }
       username
+    }
+  }
+`;
+
+export const QUERY_TRIP = gql`
+  query Query($getTripId: ID!) {
+    getTrip(tripId: $getTripId) {
+      created
+      attractions {
+        attractionId
+        date
+        name
+      }
     }
   }
 `;

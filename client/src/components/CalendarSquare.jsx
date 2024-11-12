@@ -1,8 +1,9 @@
 import { useDroppable, useDndMonitor } from "@dnd-kit/core";
 import { useState } from "react";
 import { format } from "date-fns";
+import { useEffect } from "react";
 
-export const CalendarSquare = ({ day }) => {
+export const CalendarSquare = ({ day, existingAttractions }) => {
   const { isOver, setNodeRef } = useDroppable({
     id: day.toString(),
   });
@@ -11,6 +12,12 @@ export const CalendarSquare = ({ day }) => {
   };
 
   const [attractions, setAttractions] = useState("");
+
+  useEffect(() => {
+    if (existingAttractions) {
+      setAttractions(existingAttractions);
+    }
+  }, []);
 
   useDndMonitor({
     onDragEnd(event) {

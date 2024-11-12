@@ -17,7 +17,8 @@ const resolvers = {
       throw AuthenticationError;
     },
     getTrip: async (parent, { tripId }) => {
-      return Trip.findOne({ _id: tripId });
+      const trip = await Trip.findById(tripId);
+      return trip;
     },
   },
 
@@ -54,7 +55,6 @@ const resolvers = {
       // Create a new trip with the provided attractions
       if (context.user) {
         const trip = await Trip.create({ attractions });
-        console.log(trip);
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { trips: trip._id } },
@@ -81,7 +81,7 @@ const resolvers = {
       // Edit a trip by ID
       if (context.user) {
         const trip = await Trip.findByIdAndUpdate(tripId);
-        return trip
+        return trip;
       }
       throw AuthenticationError;
     },

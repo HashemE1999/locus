@@ -13,7 +13,6 @@ const PointsOfInterest = () => {
       setLoading(true);
 
       const response = await fetchPointsOfInterest(41.8967, 12.4822);
-      console.log(response);
 
       setLoading(false);
     };

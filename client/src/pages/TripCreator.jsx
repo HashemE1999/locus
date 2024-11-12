@@ -13,6 +13,8 @@ import "ldrs/ring";
 const TripCreator = () => {
   const [currentTrip, setCurrentTrip] = useState([]);
 
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const [addTrip, { error, data }] = useMutation(ADD_TRIP);
 
   const [attractions, setAttractions] = useState([]);
@@ -71,6 +73,7 @@ const TripCreator = () => {
       setLoading(false);
       setSearchInput("");
     } catch (err) {
+      setLoading(false);
       console.error(err);
     }
   };
@@ -83,7 +86,7 @@ const TripCreator = () => {
           attractions: currentTrip,
         },
       });
-      console.log(response);
+      setShowSuccess(true);
     } catch (e) {
       console.error(e);
     }
@@ -129,7 +132,7 @@ const TripCreator = () => {
               />
               <button
                 type="submit"
-                className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-black absolute end-2.5 bottom-2.5 bg-lighterGreen hover:bg-mint focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Search
               </button>
@@ -140,7 +143,7 @@ const TripCreator = () => {
             <div className="text-center z-10">
               {loading ? (
                 <l-ring></l-ring>
-              ) : (
+              ) : attractions.length ? (
                 <div className="flex flex-row flex-wrap max-h-screen overflow-y-auto overflow-x-visible">
                   {attractions.map((attraction) => (
                     <AttractionCard
@@ -149,6 +152,8 @@ const TripCreator = () => {
                     />
                   ))}
                 </div>
+              ) : (
+                <h1 className="text-center">No data found.</h1>
               )}
             </div>
             <div className="mx-6 z-0">
@@ -160,6 +165,11 @@ const TripCreator = () => {
                 >
                   SAVE TRIP
                 </button>
+                {showSuccess && (
+                  <p>
+                    Trip saved successfully! Go to My Trips to check it out.
+                  </p>
+                )}
                 <div>
                   <Datepicker
                     asSingle={true}
@@ -188,7 +198,6 @@ const TripCreator = () => {
 
   function handleDragEnd(event) {
     const { over, active } = event;
-    console.log(over, active);
     setCurrentTrip([
       ...currentTrip,
       {
@@ -197,7 +206,6 @@ const TripCreator = () => {
         date: over.id,
       },
     ]);
-    console.log(currentTrip);
   }
 };
 
