@@ -1,6 +1,6 @@
 export const getLocation = (city) => {
   return fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${
+    `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${
       import.meta.env.VITE_OPENWEATHER_API_KEY
     }`
   );

@@ -8,6 +8,7 @@ const fetchPointsOfInterest = async (latitude, longitude, radius = 2) => {
     console.error("Failed to retrieve Amadeus token");
     return null;
   }
+
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_AMADEUS_TOURS_URL}`,
