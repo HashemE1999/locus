@@ -64,6 +64,7 @@ const TripCreator = () => {
       setLoading(true);
       const data = await getLocation(searchInput);
       const coords = await data.json();
+
       const response = await fetchPointsOfInterest(
         coords[0].lat,
         coords[0].lon
